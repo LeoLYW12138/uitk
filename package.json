@@ -110,7 +110,7 @@
     "vite-plugin-package-config": "^0.1.1",
     "vite-tsconfig-paths": "^3.4.1",
     "warning": "^4.0.3",
-    "webpack": "5"
+    "webpack": "5.72.0"
   },
   "resolutions": {
     "esbuild": "0.14.38"
