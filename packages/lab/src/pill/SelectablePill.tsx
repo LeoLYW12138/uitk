@@ -59,7 +59,9 @@ export const SelectablePill = forwardRef(function SelectablePill(
       aria-roledescription="Selectable Pill"
       clickable
       disabled={disabled}
-      className={classnames(withBaseName(`selectable`), className)}
+      className={classnames(withBaseName(`selectable`), className, {
+        [withBaseName(`checked`)]: checked,
+      })}
       icon={<PillCheckbox checked={checked} />}
       role="checkbox"
       onClick={handleClick}
