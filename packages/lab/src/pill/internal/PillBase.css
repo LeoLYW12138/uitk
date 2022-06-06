@@ -23,24 +23,24 @@
 
   --pill-checkbox-size: var(--uitkPill-checkbox-size, calc(var(--uitk-size-pill) - 2px));
 
-  --pill-icon-color: var(--uitkPill-icon-color, var(--uitk-taggable-foreground));
-  --pill-icon-color-active: var(--uitkPill-icon-color-active, var(--uitk-taggable-foreground-active));
-  --pill-icon-color-hover: var(--uitkPill-icon-color-hover, var(--uitk-taggable-foreground-hover));
+  --pill-iconColor: var(--uitkPill-iconColor, var(--uitk-taggable-foreground));
+  --pill-iconColor-active: var(--uitkPill-iconColor-active, var(--uitk-taggable-foreground-active));
+  --pill-iconColor-hover: var(--uitkPill-iconColor-hover, var(--uitk-taggable-foreground-hover));
 
-  --pill-text-color: var(--uitkPill-text-color, var(--uitk-taggable-foreground));
-  --pill-text-color-active: var(--uitkPill-text-color-active, var(--uitk-taggable-foreground-active));
-  --pill-text-color-hover: var(--uitkPill-text-color-hover, var(--uitk-taggable-foreground-hover));
+  --pill-textColor: var(--uitkPill-textColor, var(--uitk-taggable-foreground));
+  --pill-textColor-active: var(--uitkPill-textColor-active, var(--uitk-taggable-foreground-active));
+  --pill-textColor-hover: var(--uitkPill-textColor-hover, var(--uitk-taggable-foreground-hover));
 }
 
 /* Button Component API - use Pill variables so the default doesn't interfere with Pill styling */
 .uitkPill {
-  --uitkButton-background-active: var(--pill-background);
-  --uitkButton-textColor-active: var(--pill-text-color);
+  --uitkButton-background-active: var(--pill-background-active);
+  --uitkButton-textColor-active: var(--pill-textColor-active);
   --uitkButton-background-hover: var(--pill-background-hover);
-  --uitkButton-textColor-hover: var(--pill-text-color-hover);
-  --uitkButton-font-weight: var(--uitkPill-button-font-weight, var(--uitk-typography-weight-regular));
+  --uitkButton-textColor-hover: var(--pill-textColor-hover);
+  --uitkButton-font-weight: var(--uitkPill-button-fontWeight, var(--uitk-typography-weight-regular));
   --uitkButton-padding: var(--uitkPill-button-padding, 0);
-  --uitkButton-textTransform: var(--uitkPill-button-text-transform, unset);
+  --uitkButton-textTransform: var(--uitkPill-button-textTransform, unset);
   --uitkButton-cursor: normal;
 }
 
@@ -48,7 +48,7 @@
   align-items: center;
   background: var(--pill-background);
   border-radius: var(--uitkPill-borderRadius, 0);
-  color: var(--pill-text-color);
+  color: var(--pill-textColor);
   display: inline-flex;
   font-size: var(--uitkPill-fontSize, var(--uitk-text-help-fontSize));
   height: var(--uitkPill-height, var(--pill-checkbox-size));
@@ -63,7 +63,7 @@
 
 .uitkPill:focus {
   outline-color: var(--uitkPill-focused-outlineColor, var(--uitk-focused-outlineColor));
-  outline-style: var(-uitkPill-focused-outlineStyle, var(--uitk-focused-outlineStyle));
+  outline-style: var(--uitkPill-focused-outlineStyle, var(--uitk-focused-outlineStyle));
   outline-style: dotted;
   outline-width: var(--uitk-focused-outlineWidth);
   outline-offset: var(--uitk-focused-outlineOffset);
@@ -90,16 +90,23 @@
 
 /* Style applied to Pill label when `deletable={false}` */
 .uitkPill:not(.uitkPill-deletable) .uitkPill-label {
-  padding-right: var(-uitkPill-label-paddingRight, calc(var(--uitk-size-unit) * 0.75));
+  padding-right: var(--uitkPill-label-paddingRight, calc(var(--uitk-size-unit) * 0.75));
 }
 
 /* Style applied to Pill when `disabled={false}` on hover state if not active */
-.uitkPill:not(.uitkPill-disabled):hover {
+.uitkPill:not(.uitkPill-disabled):not(.uitkPill-deletable):hover {
   background: var(--pill-background-hover);
-  color: var(--pill-text-color-hover);
+  color: var(--pill-textColor-hover);
 
-  --uitkIcon-color: var(--pill-icon-color);
-  --uitkIcon-color-hover: var(--pill-icon-color-hover);
+  --uitkIcon-color: var(--pill-iconColor);
+  --uitkIcon-color-hover: var(--pill-iconColor-hover);
+}
+
+.uitkPill-deletable {
+  --uitkButton-background-active: var(--pill-background);
+  --uitkButton-textColor-active: var(--pill-textColor);
+  --uitkButton-background-hover: var(--pill-background);
+  --uitkButton-textColor-hover: var(--pill-textColor);
 }
 
 /* Style applied to Pill root when `disabled={true}` */
@@ -117,8 +124,8 @@
   cursor: var(--uitk-selectable-cursor-disabled);
   opacity: var(--uitk-opacity-foreground);
 
-  --uitkIcon-color: var(--pill-icon-color);
-  --uitkIcon-color-hover: var(--pill-icon-color);
+  --uitkIcon-color: var(--pill-iconColor);
+  --uitkIcon-color-hover: var(--pill-iconColor);
 }
 
 /* Style applied to Pill delete button */
@@ -145,24 +152,24 @@
 
 /* Style applied to Pill delete button on hover if `disabled={false}` */
 .uitkPill-deleteButton:hover:not(.uitkPill-disabled):not(.uitkPill-deleteButton-disabled) {
-  background: var(--uitkPill-delete-button-background-hover, var(--pill-background-hover));
+  background: var(--uitkPill-deleteButton-background-hover, var(--pill-background-hover));
 }
 
 /* Style applied to Pill delete button on hover if `disabled={false}` and `selectable={false}` when active */
 .uitkPill-deleteButton:active:not(.uitkPill-deleteButton-disabled):not(.uitkPill-disabled):not(.uitkPill-selectable) {
-  background: var(--uitkPill-delete-button-background-active, var(--pill-background-active));
+  background: var(--uitkPill-deleteButton-background-active, var(--pill-background-active));
 }
 
 /* Style applied to Pill delete button icon if `disabled={false}`  */
 .uitkPill-deleteButton:not(.uitkPill-deleteButton-disabled):not(.uitkPill-disabled) .uitkPill-deleteIcon {
-  color: var(--uitkPill-delete-button-color, var(--pill-background));
-  left: var(--uitkPill-delete-button-left, var(--pill-icon-offset));
+  color: var(--uitkPill-deleteButton-color, var(--pill-background));
+  left: var(--uitkPill-deleteButton-left, var(--pill-icon-offset));
   position: relative;
 }
 
 /* Style applied to Pill icon */
 .uitkPill .uitkPill-icon {
-  fill: var(--pill-icon-color);
+  fill: var(--pill-iconColor);
   height: var(--uitk-size-graphic-small);
   margin-left: calc(var(--uitk-size-unit) * 0.75);
   margin-right: calc(var(--uitk-size-unit) * 0.5);
@@ -172,7 +179,7 @@
 .uitkPill:active .uitkPill-icon,
 .uitkPill-active .uitkPill-icon,
 .uitkPill-icon:active {
-  fill: var(--pill-icon-color-active);
+  fill: var(--pill-iconColor-active);
 }
 
 .uitkPill:not(.uitkPill-deletable) .uitkPill-icon + .uitkPill-label {
@@ -189,7 +196,7 @@
 .uitkPill:not(.uitkPill-deletable):not(.uitkPill-selectable):not(.uitkPill-disabled):active,
 .uitkPill:not(.uitkPill-deletable):not(.uitkPill-selectable):not(.uitkPill-disabled).uitkPill-active {
   background: var(--pill-background-active);
-  color: var(--pill-text-color-active);
+  color: var(--pill-textColor-active);
 }
 
 .uitkPill-checked:not(.uitkPill-disabled) {
