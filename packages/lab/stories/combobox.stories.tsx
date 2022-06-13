@@ -152,11 +152,12 @@ const FormFieldComboBoxTemplate: Story<
   ComponentProps<typeof ComboBox> &
     Pick<
       ComponentProps<typeof FormField>,
-      "labelPlacement" | "label" | "required" | "LabelProps"
+      "labelPlacement" | "label" | "required" | "LabelProps" | "helperText"
     >
 > = (args) => {
   const {
     source,
+    helperText,
     width,
     labelPlacement,
     label,
@@ -168,6 +169,7 @@ const FormFieldComboBoxTemplate: Story<
     <FormField
       label={label}
       labelPlacement={labelPlacement}
+      helperText={helperText}
       required={required}
       style={{ width }}
       LabelProps={LabelProps}
@@ -334,6 +336,7 @@ export const ControlledSelection: ComponentStory<typeof ComboBox> = ({
 export const WithFormField = FormFieldComboBoxTemplate.bind({});
 WithFormField.args = {
   label: "Select",
+  helperText: "Select a color",
   width: 292,
   source: shortColorData,
   labelPlacement: "top",

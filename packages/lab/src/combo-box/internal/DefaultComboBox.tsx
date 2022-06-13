@@ -24,7 +24,7 @@ import { Input, InputProps } from "../../input";
 import { useForkRef } from "../../utils";
 import { TooltipContext, TooltipContextProps } from "../../tooltip";
 import { Portal } from "../../portal";
-import { Window } from "../../window";
+import { Window, WindowProps } from "../../window";
 import {
   flip,
   limitShift,
@@ -56,6 +56,7 @@ export type BaseComboBoxProps<
     ListItem?: ReactNode;
     ListProps?: Partial<ListProps<Item, Variant>>;
     Tooltip?: TooltipContextProps["Tooltip"];
+    WindowProps?: Partial<WindowProps>;
     allowFreeText?: boolean;
     disabled?: boolean;
     getFilterRegex?: GetFilterRegex;
@@ -84,12 +85,13 @@ export interface DefaultComboBoxProps<Item>
   stringToItem?: (value?: string) => Item | null | undefined;
 }
 
-export function DefaultComboBox<Item>(
+export const DefaultComboBox = function DefaultComboBox<Item>(
   props: DefaultComboBoxProps<Item>
 ): ReactNode {
   const {
     ListItem,
     Tooltip,
+    WindowProps = {},
     tooltipEnterDelay,
     tooltipLeaveDelay,
     tooltipPlacement,
@@ -185,6 +187,7 @@ export function DefaultComboBox<Item>(
               position: strategy,
               maxHeight: maxListHeight ?? "",
             }}
+            {...WindowProps}
             ref={floating}
           >
             <TooltipContext.Provider value={tooltipContext}>
@@ -209,4 +212,4 @@ export function DefaultComboBox<Item>(
       )}
     </>
   );
-}
+};
